@@ -203,6 +203,7 @@ namespace Redmine
             //-------------------------------------------------------
 
             ComboBox cb_issues = new ComboBox();
+            cb_issues.TabIndex = 0;
             cb_issues.Width = 571;
             cb_issues.Name = "cb_issues";
             cb_issues.DropDownStyle = ComboBoxStyle.DropDownList;
