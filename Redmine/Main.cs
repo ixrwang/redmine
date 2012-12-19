@@ -75,8 +75,12 @@ namespace Redmine
                 name = tb.Name;
                 value = tb.Text;
             }
-            if (control_hb.ContainsKey(name)) control_hb[name] = value;
-            else control_hb.Add(name, value);
+            if (value != null)
+            {
+                if (control_hb.ContainsKey(name)) control_hb[name] = value;
+                else control_hb.Add(name, value);
+            }
+            else if (control_hb.ContainsKey(name)) control_hb.Remove(name);
 
         }
 
