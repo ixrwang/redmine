@@ -109,18 +109,22 @@ namespace Redmine.BLL
             client.UploadValues(string.Format("{0}/issues/{1}.xml", domain,issues.id), "PUT", param);
         }
 
-        public void timeEntries(TimeEntries timeEntries)
+        public string timet_entries(TimeEntries timet_entries)
         {
             WebClient client = newWebClient();
             client.Encoding = System.Text.Encoding.UTF8;
             NameValueCollection param = new NameValueCollection();
-            param.Add("time_entry[issue_id]", timeEntries.issue_id);
-            param.Add("time_entry[project_id]", timeEntries.project_id);
-            param.Add("time_entry[spent_on]", timeEntries.spent_on);
-            param.Add("time_entry[hours]", timeEntries.hours);
-            param.Add("time_entry[activity_id]", timeEntries.activity_id);
-            param.Add("time_entry[comments]", timeEntries.comments);
-            client.UploadValues(string.Format("{0}/time_entries.xml", domain), param);
+            param.Add("time_entry[issue_id]", timet_entries.issue_id);
+            param.Add("time_entry[project_id]", timet_entries.project_id);
+            param.Add("time_entry[spent_on]", timet_entries.spent_on);
+            param.Add("time_entry[hours]", timet_entries.hours);
+            param.Add("time_entry[activity_id]", timet_entries.activity_id);
+            param.Add("time_entry[comments]", timet_entries.comments);
+            byte[] bytes = client.UploadValues(string.Format("{0}/time_entries.xml", domain), param);
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(UTF8Encoding.UTF8.GetString(bytes));
+            XmlNode node = xml.SelectSingleNode("time_entry/id");
+            return node.InnerText;
         }
 
         private WebClient newWebClient()

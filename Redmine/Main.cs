@@ -91,24 +91,24 @@ namespace Redmine
             ComboBox cb_activity = (ComboBox)panel_context.Controls["cb_activity"];
             MaskedTextBox mtb_time = (MaskedTextBox)panel_context.Controls["mtb_time"];
             TextBox tb_context = (TextBox)panel_context.Controls["tb_context"];
-            TimeEntries timeEntries = new TimeEntries();
-            timeEntries.project_id = cb_project.SelectedValue.ToString();
-            timeEntries.spent_on = dtp_time.Text;
-            timeEntries.activity_id = cb_activity.SelectedValue.ToString();
-            timeEntries.hours = mtb_time.Text;
-            if (".".Equals(timeEntries.hours))
+            TimeEntries timet_entries = new TimeEntries();
+            timet_entries.project_id = cb_project.SelectedValue.ToString();
+            timet_entries.spent_on = dtp_time.Text;
+            timet_entries.activity_id = cb_activity.SelectedValue.ToString();
+            timet_entries.hours = mtb_time.Text;
+            if (".".Equals(timet_entries.hours))
             {
                 MessageBox.Show("请填写工时！");
                 return;
             }
-            else if (timeEntries.hours.EndsWith("."))
+            else if (timet_entries.hours.EndsWith("."))
             {
-                timeEntries.hours = timeEntries.hours.Substring(0, timeEntries.hours.Length - 1);
+                timet_entries.hours = timet_entries.hours.Substring(0, timet_entries.hours.Length - 1);
             }
-            timeEntries.comments = tb_context.Text;
+            timet_entries.comments = tb_context.Text;
             try
             {
-                service.timeEntries(timeEntries);
+                service.timet_entries(timet_entries);
                 MessageBox.Show("打卡成功！");
             }
             catch (Exception ex)
